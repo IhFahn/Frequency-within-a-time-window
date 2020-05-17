@@ -1,0 +1,26 @@
+def WeekFreq(dff):
+    i = 0
+    j = 0
+    while i != dff.shape[0]:
+        weekfreq = 0
+        userid = dff['ID'][i]
+        firstday = dff['TransactionDate'][i]
+        weekfreq = weekfreq + 1
+        days_in_a_week = 7
+        j = j + 1
+        
+        while (j != dff.shape[0]) and (dff['ID'][j] == userid):
+            if (dff['TransactionDate'][j] - firstday).days < days_in_a_week:
+                weekfreq = weekfreq + 1
+            else:
+                break
+                
+            if (j == dff.shape[0]):
+                pass
+            else:
+                j = j + 1
+                
+        while i != j:
+            
+            dff['WeekFrequency'][i] = weekfreq
+            i = i + 1
